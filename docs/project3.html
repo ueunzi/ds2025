@@ -135,6 +135,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="./project2.html"> 
 <span class="menu-text">Project2</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./project3.html" aria-current="page"> 
+<span class="menu-text">Project3</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -151,7 +155,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#데이터-탐색" id="toc-데이터-탐색" class="nav-link active" data-scroll-target="#데이터-탐색">1. 데이터 탐색</a></li>
+  <li><a href="#데이터-탐색-및-결측지-확인" id="toc-데이터-탐색-및-결측지-확인" class="nav-link active" data-scroll-target="#데이터-탐색-및-결측지-확인">1. 데이터 탐색 및 결측지 확인</a></li>
+  <li><a href="#생존에-영향을-미치는-요인-분석" id="toc-생존에-영향을-미치는-요인-분석" class="nav-link" data-scroll-target="#생존에-영향을-미치는-요인-분석">2. 생존에 영향을 미치는 요인 분석</a></li>
+  <li><a href="#데이터-전처리" id="toc-데이터-전처리" class="nav-link" data-scroll-target="#데이터-전처리">3. 데이터 전처리</a></li>
+  <li><a href="#예측-모델-학습" id="toc-예측-모델-학습" class="nav-link" data-scroll-target="#예측-모델-학습">4. 예측 모델 학습</a></li>
   </ul>
 </nav>
     </div>
@@ -181,7 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>RMS 타이타닉은 영국의 화이트 스타 라인이 운영한 북대서양 횡단 여객선으로, 1912년 4월 10일 첫 출항하였다. 영국의 사우샘프턴을 떠나 미국의 뉴욕으로호 향하던 중에 3월 15일 빙산과 충돌하여 침몰하였으며, 이로 인해 1,514명이 사망한 것으로 알려져 있다.</p></li>
 <li><p>타이타닉 데이터를 분석하여 생존에 영향을 미친 요인은 무엇인지 파악하고, 예측하는 모델을 학습해보자.</p></li>
 </ul>
-<div id="a42434ec-f0da-4ef1-a159-cf7a05b25709" class="cell" data-execution_count="3">
+<div id="a42434ec-f0da-4ef1-a159-cf7a05b25709" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -189,9 +196,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> sns.load_dataset(<span class="st">'titanic'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="1f86c8c7-67fd-414f-a433-7bf3fbf5f49d" class="cell" data-execution_count="4">
+<div id="1f86c8c7-67fd-414f-a433-7bf3fbf5f49d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
 
@@ -423,9 +430,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><df></df></p>
-<section id="데이터-탐색" class="level2">
-<h2 class="anchored" data-anchor-id="데이터-탐색">1. 데이터 탐색</h2>
-<div id="9897ae73-3523-407f-b3cf-3db851d8ffaf" class="cell" data-execution_count="6">
+<section id="데이터-탐색-및-결측지-확인" class="level2">
+<h2 class="anchored" data-anchor-id="데이터-탐색-및-결측지-확인">1. 데이터 탐색 및 결측지 확인</h2>
+<div id="9897ae73-3523-407f-b3cf-3db851d8ffaf" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 기본 정보 확인</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.info())</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.describe())</span>
@@ -478,7 +485,7 @@ max      1.000000    3.000000   80.000000    8.000000    6.000000  512.329200
 4    man        True  NaN  Southampton    no   True  </code></pre>
 </div>
 </div>
-<div id="ded0f510-21a4-4d79-b52f-3aa7e47a85e3" class="cell" data-execution_count="7">
+<div id="ded0f510-21a4-4d79-b52f-3aa7e47a85e3" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 결측치 확인</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.isnull().<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -500,6 +507,123 @@ alone            0
 dtype: int64</code></pre>
 </div>
 </div>
+</section>
+<section id="생존에-영향을-미치는-요인-분석" class="level2">
+<h2 class="anchored" data-anchor-id="생존에-영향을-미치는-요인-분석">2. 생존에 영향을 미치는 요인 분석</h2>
+<div id="c6385fab-4fe1-454f-a3dd-eb24a08fbe6e" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'sex'</span>, hue<span class="op">=</span><span class="st">'survived'</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'suvive count'</span>)  <span class="co"># 성별에 따른 생존자 수</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project3_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="c600294c-488f-4382-acb0-69ad9a35841e" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'age'</span>, hue<span class="op">=</span><span class="st">'survived'</span>, bins<span class="op">=</span><span class="dv">20</span>, kde<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Age distribution and survival'</span>) </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project3_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="957337cd-e671-408a-a1a8-f5f358e25f8b" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'pclass'</span>, hue<span class="op">=</span><span class="st">'survived'</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Number of survivors by cabin grade'</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project3_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="dae98bcd-7baf-4297-98d0-2f5b997d6666" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'family_size'</span>] <span class="op">=</span> df[<span class="st">'sibsp'</span>] <span class="op">+</span> df[<span class="st">'parch'</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sns.countplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'family_size'</span>, hue<span class="op">=</span><span class="st">'survived'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'the survival rate according to the number of families'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project3_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="데이터-전처리" class="level2">
+<h2 class="anchored" data-anchor-id="데이터-전처리">3. 데이터 전처리</h2>
+<div id="100dc07a-1043-46f6-ae54-2d00d0e221b7" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 필요한 열만 선택하고 결측치 처리</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> df[[<span class="st">'survived'</span>, <span class="st">'pclass'</span>, <span class="st">'sex'</span>, <span class="st">'age'</span>, <span class="st">'sibsp'</span>, <span class="st">'parch'</span>, <span class="st">'fare'</span>, <span class="st">'embarked'</span>]].copy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="7b1dd56a-444b-4a3d-bb2f-13ecf1c0538f" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 결측치 처리</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>data.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="2e25af1c-c0ee-478b-83b3-4494aedaac77" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 범주형 변수 처리</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'sex'</span>] <span class="op">=</span> data[<span class="st">'sex'</span>].<span class="bu">map</span>({<span class="st">'male'</span>: <span class="dv">0</span>, <span class="st">'female'</span>: <span class="dv">1</span>})</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'embarked'</span>] <span class="op">=</span> data[<span class="st">'embarked'</span>].<span class="bu">map</span>({<span class="st">'S'</span>: <span class="dv">0</span>, <span class="st">'C'</span>: <span class="dv">1</span>, <span class="st">'Q'</span>: <span class="dv">2</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="예측-모델-학습" class="level2">
+<h2 class="anchored" data-anchor-id="예측-모델-학습">4. 예측 모델 학습</h2>
+<div id="5f893039-2f91-46cc-866c-42e24489a213" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, classification_report</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="16c84468-cd06-40f6-8199-e8ada5b82e3a" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 입력 변수(X)와 타깃(y) 설정</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.drop(<span class="st">'survived'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">'survived'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="63e2660c-5a32-4932-b2f7-7f71d4063414" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 학습용/검증용 분리</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="114888e4-a69f-49bb-9a72-782b30e965cd" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 학습</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LogisticRegression(max_iter<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="77d8fe92-e489-46f2-94e5-a3223a982adc" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 예측 및 평가</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"정확도:"</span>, accuracy_score(y_test, y_pred))</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>정확도: 0.7972027972027972
+              precision    recall  f1-score   support
+
+           0       0.77      0.91      0.83        80
+           1       0.85      0.65      0.74        63
+
+    accuracy                           0.80       143
+   macro avg       0.81      0.78      0.79       143
+weighted avg       0.81      0.80      0.79       143
+</code></pre>
+</div>
+</div>
+<ul>
+<li>&lt;결론&gt;
+<ul>
+<li>여성의 생존자 비율의 수가 더 높다.</li>
+<li>나이는 어린이의 생존율이 높은 결과를 보여주었다.</li>
+<li>선실 등급에서 1등석 승객이 더 많이 생존하였다.</li>
+<li>가족 수는 혼자보다는 동행이 있는 승객의 생존율이 더 높은 것으로 나타남</li>
+</ul></li>
+</ul>
 
 
 </section>
