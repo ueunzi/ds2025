@@ -10,6 +10,8 @@ website:
         text: Project1
       - href: project2.ipynb
         text: Project2
+      - href: project3.ipynb
+        text: Project3
 
 format:
   html:
