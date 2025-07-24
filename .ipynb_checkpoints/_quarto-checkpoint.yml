@@ -6,7 +6,7 @@ website:
   title: "2025 창의연합과제연구"
   navbar:
     left:
-      - href: project 1 250724.ipynb
+      - href: project1.ipynb
         text: Project1
       - href: project2.ipynb
         text: Project2
